@@ -1,0 +1,54 @@
+service: serverless-mentor
+app: serverless-mentor
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 128
+  timeout: 30
+
+functions:
+
+  getMentor:
+    handler: handler.getMentor
+    events:
+    - http:
+        path: mentor/{id}
+        method: get
+        cors: true
+          
+  getAllMentors:
+    handler: handler.getAllMentors
+    events:
+    - http:
+        path: mentor
+        method: get
+        cors: true
+
+  createMentor:
+    handler: handler.createMentor
+    events:
+      - http:
+          path: mentor
+          method: post
+          cors: true
+              
+  updateMentor:
+    handler: handler.updateMentor
+    events:
+      - http:
+          path: mentor/{id}
+          method: put
+          cors: true
+          
+  deleteMentor:
+    handler: handler.deleteMentor
+    events:
+      - http:
+          path: mentor/{id}
+          method: delete
+          cors: true    
+            
+plugins:
+  - serverless-offline
+  
